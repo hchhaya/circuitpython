@@ -142,9 +142,8 @@ bool start_mp(safe_mode_t safe_mode) {
     } else {
         new_status_color(MAIN_RUNNING);
 
-        const char *supported_filenames[] = STRING_LIST("code.txt", "code.py", "main.py", "main.txt");
-        const char *double_extension_filenames[] = STRING_LIST("code.txt.py", "code.py.txt", "code.txt.txt","code.py.py",
-                                                    "main.txt.py", "main.py.txt", "main.txt.txt","main.py.py");
+        const char *supported_filenames[] = STRING_LIST("code.txt", "code.py", "main.py", "main.txt", "script.py");
+        const char *double_extension_filenames[] = STRING_LIST("code.txt.py", "code.py.txt", "code.txt.txt","code.py.py", "main.txt.py", "main.py.txt", "main.txt.txt","main.py.py", "script.py.py", "script.txt.py", "script.txt.txt", "script.py.py");
         reset_mp();
         found_main = maybe_run_list(supported_filenames, &result);
         if (!found_main){
