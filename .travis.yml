@@ -91,6 +91,10 @@ script:
 
 deploy:
   provider: pages
+  repo: automatic-waffle
+  email: harshal@chhaya.org
+  verbose: true
+  committer-from-gh: true
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   keep-history: true
