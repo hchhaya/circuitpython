@@ -90,10 +90,8 @@ script:
   #- (cd ports/unix && coveralls --root ../.. --build-root . --gcov $(which gcov) --gcov-options '\-o build-coverage/' --include py --include extmod)
 
 deploy:
-  edge:
-    branch: v1.8.47
   provider: pages
-  repo: automatic-waffle
+  repo: hchhaya/automatic-waffle
   email: harshal@chhaya.org
   verbose: true
   committer-from-gh: true
