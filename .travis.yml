@@ -4,26 +4,7 @@ language: c
 compiler:
   - gcc
 env:
-  - TRAVIS_BOARD=arduino_zero
-  - TRAVIS_BOARD=circuitplayground_express
-  - TRAVIS_BOARD=feather_m0_basic
-  - TRAVIS_BOARD=feather_m0_adalogger
-  - TRAVIS_BOARD=feather_m0_rfm69
-  - TRAVIS_BOARD=feather_m0_rfm9x
-  - TRAVIS_BOARD=feather_m0_express
-  - TRAVIS_BOARD=feather_m4_express
-  - TRAVIS_BOARD=itsybitsy_m0_express
-  - TRAVIS_BOARD=itsybitsy_m4_express
-  - TRAVIS_BOARD=metro_m0_express
-  - TRAVIS_BOARD=metro_m4_express
-  - TRAVIS_BOARD=metro_m4_express_revb
-  - TRAVIS_BOARD=pirkey_m0
   - TRAVIS_BOARD=trinket_m0
-  - TRAVIS_BOARD=gemma_m0
-  - TRAVIS_BOARD=feather52
-  - TRAVIS_TEST=qemu
-  - TRAVIS_TEST=unix
-  - TRAVIS_TEST=docs
 
 addons:
   artifacts:
@@ -107,6 +88,15 @@ script:
 
   # run coveralls coverage analysis (try to, even if some builds/tests failed)
   #- (cd ports/unix && coveralls --root ../.. --build-root . --gcov $(which gcov) --gcov-options '\-o build-coverage/' --include py --include extmod)
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  email:
+  on:
+    branch: master
 
 after_failure:
   - (cd tests && for exp in *.exp; do testbase=$(basename $exp .exp); echo -e "\nFAILURE $testbase"; diff -u $testbase.exp $testbase.out; done)
