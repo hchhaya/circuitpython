@@ -61,6 +61,9 @@ for board in $boards; do
 
 	echo "-- Harshal: After copy"
 	ls -l bin/$board/adafruit-circuitpython-$board-$version.bin
+	cp bin/$board/adafruit-circuitpython-$board-$version.bin bin/$board/adafruit-circuitpython-harshal.bin 
+	ls -l bin/$board/adafruit-circuitpython-harshal.bin 
+
 
         (( exit_status = exit_status || $? ))
         cp ports/atmel-samd/build-$board/firmware.uf2 bin/$board/adafruit-circuitpython-$board-$version.uf2

@@ -89,17 +89,16 @@ script:
   #- (cd ports/unix && coveralls --root ../.. --build-root . --gcov $(which gcov) --gcov-options '\-o build-coverage/' --include py --include extmod)
 
 deploy:
-    provider: pages
-    repo: hchhaya/automatic-waffle
+    provider: releases
     email: harshal@chhaya.org
     verbose: true
     committer-from-gh: true
     skip-cleanup: true
     github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
     keep-history: true
-    email:
+    file: bin/trinket_m0/adafruit-circuitpython-trinket_m0-harshal.bin
     on:
-      branch: master
+      tags: master
 
 after_failure:
   - (cd tests && for exp in *.exp; do testbase=$(basename $exp .exp); echo -e "\nFAILURE $testbase"; diff -u $testbase.exp $testbase.out; done)
