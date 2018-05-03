@@ -90,7 +90,7 @@ script:
 
 deploy:
   provider: pages
-  repo: hchhaya/circuitpython
+  repo: hchhaya/automatic-waffle
   email: harshal@chhaya.org
   verbose: true
   committer-from-gh: true
