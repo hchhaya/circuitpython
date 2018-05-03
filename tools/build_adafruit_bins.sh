@@ -35,6 +35,7 @@ if [ $? -ne 0 ]; then
     version=`date +%Y%m%d`-`git rev-parse --short HEAD`
 fi
 
+echo "Version: " $version
 
 if [ "$TRAVIS" == "true" ]; then
     sha=$TRAVIS_COMMIT
@@ -50,12 +51,21 @@ for board in $boards; do
         cp ports/nrf/build-$board-s132/firmware.bin bin/$board/adafruit-circuitpython-$board-$version.bin
         (( exit_status = exit_status || $? ))
     else
-	echo "Before cp Board: " $board
+	echo "Build done for Board: " $board
 	ls ports/atmel-samd/build-$board/
+	echo "--- Harshal --- "
+	ls ports/atmel-samd/build-$board/firmware.bin
+	ls ports/atmel-samd/build-$board/firmware.uf2
+
         cp ports/atmel-samd/build-$board/firmware.bin bin/$board/adafruit-circuitpython-$board-$version.bin
+
+	echo "-- Harshal: After copy"
+	ls -l bin/$board/adafruit-circuitpython-$board-$version.bin
+
         (( exit_status = exit_status || $? ))
         cp ports/atmel-samd/build-$board/firmware.uf2 bin/$board/adafruit-circuitpython-$board-$version.uf2
         (( exit_status = exit_status || $? ))
+
     fi
     # Only upload to Rosie if its a pull request.
     if [ "$TRAVIS" == "true" ]; then
